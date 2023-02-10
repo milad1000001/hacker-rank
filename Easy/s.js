@@ -1,46 +1,68 @@
-/*Staircase detail
-This is a staircase of size :
-   #
-  ##
- ###
-####
-Its base and height are both equal to . It is drawn using # symbols and spaces. The last line is not preceded by any spaces.
-Write a program that prints a staircase of size .
-Function Description
-Complete the staircase function in the editor below.
-staircase has the following parameter(s):
-int n: an integer
-Print
-Print a staircase as described above.
-Input Format
-A single integer, , denoting the size of the staircase.
-Constraints
- .
-Output Format
-Print a staircase of size  using # symbols and spaces.
-Note: The last line must have  spaces in it.
-Sample Input
-6 
-Sample Output
-     #
-    ##
-   ###
-  ####
- #####
-######
-Explanation
-The staircase is right-aligned, composed of # symbols and spaces, and has a height and width of n = 6.*/
+// Given five positive integers, find the minimum and maximum values that can be calculated by summing exactly four of the five integers. Then print the respective minimum and maximum values as a single line of two space-separated long integers.
+// Example
+// The minimum sum is  and the maximum sum is . The function prints
+// 16 24
+// Function Description
+// Complete the miniMaxSum function in the editor below.
+// miniMaxSum has the following parameter(s):
+// arr: an array of  integers
+// Print
+// Print two space-separated integers on one line: the minimum sum and the maximum sum of  of  elements.
+// Input Format
+// A single line of five space-separated integers.
+// Constraints
+// Output Format
+// Print two space-separated long integers denoting the respective minimum and maximum values that can be calculated by summing exactly four of the five integers. (The output can be greater than a 32 bit integer.)
+// Sample Input
+// 1 2 3 4 5
+// Sample Output
+// 10 14
+'use strict';
 
-let string = "";
-for (let i = 1; i <= n; i++) {
-  // printing spaces
-  for (let j = 0; j < n - i; j++) {
-    string += " ";
-  }
-  // printing star
-  for (let k = 0; k < i; k++) {
-    string += "*";
-  }
-  string += "\n";
+process.stdin.resume();
+process.stdin.setEncoding('utf-8');
+
+let inputString = '';
+let currentLine = 0;
+
+process.stdin.on('data', function(inputStdin) {
+    inputString += inputStdin;
+});
+
+process.stdin.on('end', function() {
+    inputString = inputString.split('\n');
+
+    main();
+});
+
+function readLine() {
+    return inputString[currentLine++];
 }
-console.log(string);
+
+/*
+ * Complete the 'miniMaxSum' function below.
+ *
+ * The function accepts INTEGER_ARRAY arr as parameter.
+ */
+
+function sum(arr){
+    return arr.reduce((result,item)=>{
+        return result+item
+    },0)
+}
+
+function miniMaxSum(arr) {
+    let sortArr = arr.sort()
+    let minSum = arr.slice(0,4)
+    let maxSum = arr.slice(1,5)
+    console.log(sum(minSum),sum(maxSum))
+}
+
+
+
+function main() {
+
+    const arr = readLine().replace(/\s+$/g, '').split(' ').map(arrTemp => parseInt(arrTemp, 10));
+
+    miniMaxSum(arr);
+}
